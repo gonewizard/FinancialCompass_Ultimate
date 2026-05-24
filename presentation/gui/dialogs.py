@@ -120,7 +120,7 @@ class AddToGoalDialog:
     def show(parent, goal_name, goal_id, on_add):
         dialog = ctk.CTkToplevel(parent)
         dialog.title("Пополнение цели")
-        dialog.geometry("350x200")
+        dialog.geometry("400x240")
         dialog.transient(parent)
         dialog.grab_set()
 
@@ -128,14 +128,14 @@ class AddToGoalDialog:
         frame.pack(fill="both", expand=True, padx=20, pady=20)
 
         ctk.CTkLabel(frame, text=f"Цель: {goal_name}", font=("Arial", 14, "bold")).pack(pady=10)
-        ctk.CTkLabel(frame, text="Сумма пополнения (₽):", font=("Arial", 12)).pack(pady=5)
+        ctk.CTkLabel(frame, text="Сумма пополнения (руб.):", font=("Arial", 12)).pack(pady=5)
 
         amount_var = ctk.StringVar()
-        amount_entry = ctk.CTkEntry(frame, textvariable=amount_var, width=150, font=("Arial", 14))
-        amount_entry.pack(pady=5)
+        amount_entry = ctk.CTkEntry(frame, textvariable=amount_var, width=200, font=("Arial", 14))
+        amount_entry.pack(pady=10)
         amount_entry.focus()
 
-        button_frame = ctk.CTkFrame(frame)
+        button_frame = ctk.CTkFrame(frame, fg_color="transparent")
         button_frame.pack(pady=15)
 
         def add():
@@ -149,7 +149,12 @@ class AddToGoalDialog:
             except ValueError:
                 messagebox.showerror("Ошибка", "Неверный формат суммы")
 
-        ctk.CTkButton(button_frame, text="Пополнить", command=add, width=100, corner_radius=10).pack(side="left",
-                                                                                                     padx=10)
-        ctk.CTkButton(button_frame, text="Отмена", command=dialog.destroy, width=100, corner_radius=10).pack(
-            side="left", padx=10)
+        btn_ok = ctk.CTkButton(button_frame, text="Пополнить", command=add, width=120, height=40, corner_radius=8,
+                               fg_color="#2ecc71", hover_color="#27ae60", text_color="white",
+                               font=("Arial", 13, "bold"))
+        btn_ok.pack(side="left", padx=15)
+
+        btn_cancel = ctk.CTkButton(button_frame, text="Отмена", command=dialog.destroy, width=120, height=40,
+                                   corner_radius=8, fg_color="#e74c3c", hover_color="#c0392b", text_color="white",
+                                   font=("Arial", 13, "bold"))
+        btn_cancel.pack(side="left", padx=15)
