@@ -1,0 +1,1 @@
+from presentation.gui.main_window import FinancialCompassGUI
